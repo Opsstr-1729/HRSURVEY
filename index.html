@@ -51,59 +51,54 @@
     }
 
     /* ── HEADER ── */
+    .header-accent-bar {
+      height: 3px;
+      background: linear-gradient(90deg, #0e5774 0%, #1a9dc9 40%, #4db8de 55%, #1a9dc9 70%, #0e5774 100%);
+    }
     header {
-      background: var(--ink);
+      background: #0e5774;
       position: sticky;
       top: 0;
       z-index: 100;
-    }
-    .header-accent-bar {
-      height: 3px;
-      background: linear-gradient(90deg, var(--ink) 0%, var(--accent) 35%, var(--a-mid) 55%, var(--accent) 75%, var(--ink) 100%);
+      box-shadow: 0 2px 16px rgba(14,87,116,.3);
     }
     .header-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 1.4rem 2.5rem;
+      width: 100%;
       display: flex;
-      align-items: center;
+      align-items: stretch;
       justify-content: space-between;
-      gap: 2rem;
       flex-wrap: wrap;
+      min-height: 80px;
     }
     .brand {
       display: flex;
-      align-items: center;
-      gap: 1.25rem;
+      align-items: stretch;
+      flex: 1;
     }
     .brand-logobox {
-      width: 52px;
-      height: 52px;
-      border-radius: 11px;
-      background: var(--accent);
       display: flex;
       align-items: center;
-      justify-content: center;
+      padding: .75rem 1.75rem;
+      background: #ffffff;
       flex-shrink: 0;
-      overflow: hidden;
+      border-right: 1px solid rgba(255,255,255,.15);
     }
     .brand-logobox img {
-      width: 100%;
-      height: 100%;
+      height: 54px;
+      width: auto;
+      max-width: 260px;
       object-fit: contain;
-      display: none;
+      display: block;
     }
-    .brand-logobox img.loaded { display: block; }
-    .brand-logobox .logo-fallback {
-      width: 28px;
-      height: 28px;
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1rem 2rem;
     }
-    .brand-logobox .logo-fallback path,
-    .brand-logobox .logo-fallback rect,
-    .brand-logobox .logo-fallback circle { fill: rgba(255,255,255,.9); }
     .brand-text h1 {
       font-family: var(--display);
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: #fff;
       letter-spacing: -.01em;
@@ -111,40 +106,42 @@
     }
     .brand-text p {
       font-family: var(--mono);
-      font-size: .65rem;
-      color: #4a7a90;
+      font-size: .63rem;
+      color: rgba(255,255,255,.5);
       text-transform: uppercase;
       letter-spacing: .14em;
-      margin-top: .2rem;
+      margin-top: .3rem;
     }
     .header-stats {
       display: flex;
-      gap: .625rem;
+      align-items: stretch;
+      border-left: 1px solid rgba(255,255,255,.1);
     }
     .stat-chip {
-      background: rgba(255,255,255,.055);
-      border: 1px solid rgba(255,255,255,.09);
-      border-radius: var(--r2);
-      padding: .7rem 1.3rem;
-      text-align: center;
-      min-width: 78px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2rem;
+      border-right: 1px solid rgba(255,255,255,.08);
       transition: background .2s;
+      min-width: 90px;
     }
-    .stat-chip:hover { background: rgba(255,255,255,.09); }
+    .stat-chip:hover { background: rgba(255,255,255,.1); }
     .stat-chip .n {
       font-family: var(--mono);
-      font-size: 1.55rem;
+      font-size: 1.6rem;
       font-weight: 600;
-      color: #ffffff;
+      color: #fff;
       line-height: 1;
       letter-spacing: -.02em;
     }
     .stat-chip .l {
-      font-size: .62rem;
+      font-size: .61rem;
       text-transform: uppercase;
       letter-spacing: .12em;
-      color: #4a7a90;
-      margin-top: .25rem;
+      color: rgba(255,255,255,.45);
+      margin-top: .3rem;
     }
 
     /* ── MAIN ── */
@@ -527,14 +524,7 @@
     <div class="header-inner">
       <div class="brand">
         <div class="brand-logobox">
-          <img id="mainLogo" alt="KASE Logo" />
-          <!-- Fallback icon shown when no logo is set -->
-          <svg class="logo-fallback" id="logoFallback" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="2" width="11" height="11" rx="2.5"/>
-            <rect x="15" y="2" width="11" height="11" rx="2.5"/>
-            <rect x="2" y="15" width="11" height="11" rx="2.5"/>
-            <circle cx="20.5" cy="20.5" r="5.5"/>
-          </svg>
+          <img id="mainLogo" alt="KASE · IT Operations and Strategy Division" />
         </div>
         <div class="brand-text">
           <h1>Kerala HR Survey 2026</h1>
@@ -598,7 +588,7 @@
     // ── CONFIGURATION ──────────────────────────────────────────────────────────
 
     // Paste your logo base64 string here (without the data:image/png;base64, prefix)
-    const LOGO_BASE64 = "";
+    const LOGO_BASE64 = "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";
 
     // Google Sheets published CSV URL
     const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQYDoK6XFGUKeyrW6JAtiYoaHDKR2h1gz12cp8w-fZ0jAebK8MK4bJdvRi3AceYej_7oOKp3S2akVW7/pub?output=csv';
@@ -798,15 +788,7 @@
     async function init() {
       // Logo
       const logoImg = document.getElementById('mainLogo');
-      const logoFallback = document.getElementById('logoFallback');
-      if (LOGO_BASE64) {
-        logoImg.src = 'data:image/png;base64,' + LOGO_BASE64;
-        logoImg.onload = () => { logoImg.classList.add('loaded'); logoFallback.style.display = 'none'; };
-      } else {
-        // Try loading from local file as fallback
-        logoImg.src = 'HIGH_RES-removebg-preview.png';
-        logoImg.onload = () => { logoImg.classList.add('loaded'); logoFallback.style.display = 'none'; };
-      }
+      logoImg.src = 'data:image/png;base64,' + LOGO_BASE64;
 
       // Fetch data
       try {
